@@ -1,6 +1,17 @@
 Add-Type -AssemblyName System.Web
 
-$logLocation = "C:\Wuthering Waves\Wuthering Waves Game\Client\Binaries\Win64\ThirdParty\KrPcSdk_Global\KRSDKRes\KRSDKWebView\debug.log";
+$gameLocation = Get-ChildItem -Path C:\ -Filter "Wuthering Waves.exe" -Recurse -ErrorAction SilentlyContinue | ForEach-Object { Split-Path -Path $_.FullName }
+if (-not $gameLocation) {
+    Write-Host "Wuthering Waves not found in C drive. Start search from D drive."
+    $gameLocation = Get-ChildItem -Path D:\ -Filter "Wuthering Waves.exe" -Recurse -ErrorAction SilentlyContinue | ForEach-Object { Split-Path -Path $_.FullName }
+}
+if (-not $gameLocation) {
+    Write-Host "Wuthering Waves not found in D drive. Start search from E drive."
+    $gameLocation = Get-ChildItem -Path E:\ -Filter "Wuthering Waves.exe" -Recurse -ErrorAction SilentlyContinue | ForEach-Object { Split-Path -Path $_.FullName }
+}
+
+#$logLocation = "C:\Wuthering Waves\Wuthering Waves Game\Client\Binaries\Win64\ThirdParty\KrPcSdk_Global\KRSDKRes\KRSDKWebView\debug.log";
+$logLocation = $gameLocation + "\Client\Binaries\Win64\ThirdParty\KrPcSdk_Global\KRSDKRes\KRSDKWebView\debug.log";
 
 $path = [System.Environment]::ExpandEnvironmentVariables($logLocation);
 Write-Host $path
