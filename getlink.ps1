@@ -12,6 +12,10 @@ if (-Not [System.IO.File]::Exists($path)) {
         Write-Host "Wuthering Waves not found in D drive. Start search from E drive."
         $gameLocation = Get-ChildItem -Path E:\ -Filter "Wuthering Waves.exe" -Recurse -ErrorAction SilentlyContinue | ForEach-Object { Split-Path -Path $_.FullName }
     }
+    if (-not $gameLocation) {
+        Write-Host "Wuthering Waves not found in E drive. Start search from F drive."
+        $gameLocation = Get-ChildItem -Path F:\ -Filter "Wuthering Waves.exe" -Recurse -ErrorAction SilentlyContinue | ForEach-Object { Split-Path -Path $_.FullName }
+    }
     $logLocation = $gameLocation + "\Client\Binaries\Win64\ThirdParty\KrPcSdk_Global\KRSDKRes\KRSDKWebView\debug.log";
 }
 
