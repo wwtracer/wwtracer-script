@@ -1,9 +1,9 @@
 Add-Type -AssemblyName System.Web
 
-$logLocation = "D:\Wuthering Waves\Wuthering Waves Game\Client\Binaries\Win64\ThirdParty\KrPcSdk_Global\KRSDKRes\KRSDKWebView\debug.log";
+$logLocation = "F:\Wuthering Waves\Wuthering Waves Game\Client\Binaries\Win64\ThirdParty\KrPcSdk_Global\KRSDKRes\KRSDKWebView\debug.log";
 if (-Not [System.IO.File]::Exists($path)) {
     Write-Host "Finding installation path .... "
-    $gameLocation = Get-ChildItem -Path D:\ -Filter "Wuthering Waves.exe" -Recurse -ErrorAction SilentlyContinue | ForEach-Object { Split-Path -Path $_.FullName }
+    $gameLocation = Get-ChildItem -Path F:\ -Filter "Wuthering Waves.exe" -Recurse -ErrorAction SilentlyContinue | ForEach-Object { Split-Path -Path $_.FullName }
     $logLocation = $gameLocation + "\Client\Binaries\Win64\ThirdParty\KrPcSdk_Global\KRSDKRes\KRSDKWebView\debug.log";
 }
 
